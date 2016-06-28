@@ -13,13 +13,27 @@
 const PHONE = 99.99;//making these consts literal values since the prompt() method above makes the prompt input a string
 const ACCESSORY = 24.99;
 const TAX = 0.06;
+const LIMIT = 100;
+
+var bankAccount = 1000;
 
 function calculateTotalPurchaseAmount() {
-  var amount = PHONE + ACCESSORY;
-  console.log('amount is: ' + amount);
-  console.log(typeof(amount) === 'number');
-  amount = Number((amount + (amount * TAX)).toFixed(2));//the toFixed() method returns the number as a string, so the whole amount is wrapped in the Number() object to turn the toFixed() string to a number
-  console.log(typeof(amount) === 'number');
+  //console.log('amount is: ' + amount);
+  //console.log(typeof(amount) === 'number');
+  //amount = Number((amount + (amount * TAX)).toFixed(2));//the toFixed() method returns the number as a string, so the whole amount is wrapped in the Number() object to turn the toFixed() string to a number
+  //console.log(typeof(amount) === 'number');
+
+  amountPhonePlusAccessoryPlusTax = Number(((PHONE + ACCESSORY) + ((PHONE + ACCESSORY) * TAX)).toFixed(2));
+  amountPhonePlusTax = Number((PHONE + (PHONE * TAX)).toFixed(2));
+
+  console.log('amountPhonePlusAccessoryPlusTax is: ' + amountPhonePlusAccessoryPlusTax);
+  console.log('amountPhonePlusTax is: ' + amountPhonePlusTax);
+
+  if (amountPhonePlusAccessoryPlusTax <= (bankAccount - LIMIT)) {
+    bankAccount = bankAccount - amountPhonePlusAccessoryPlusTax;
+    console.log('A phone and accessory were purchased! And $' + amountPhonePlusAccessoryPlusTax + ' was deducted from your bank account!\nYou\'re bank account balance is now $' + bankAccount + '.');
+  }
+
   return amount;
 }
 
